@@ -22,12 +22,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.deocore.outlove.ui.viewmodel.PosterGeneratorViewModel
+import dev.deocore.outlove.ui.theme.LoveScreen
+import dev.deocore.outlove.ui.theme.loveScreenBackground
+import dev.deocore.outlove.ui.theme.LoveColors
+import dev.deocore.outlove.ui.theme.LoveGradientButton
 
 private enum class PosterType(val title: String, val color: Color, val icon: ImageVector) {
-    Days("Дни вместе", Color(0xFFFF2D55), Icons.Rounded.Favorite),
-    Achievements("Достижения", Color(0xFFFF9500), Icons.Rounded.EmojiEvents),
-    Map("Карта", Color(0xFF34C759), Icons.Rounded.Map),
-    Stats("Статистика", Color(0xFF007AFF), Icons.Rounded.BarChart),
+    Days("Дни вместе", LoveColors.Pink, Icons.Rounded.Favorite),
+    Achievements("Достижения", LoveColors.Orange, Icons.Rounded.EmojiEvents),
+    Map("Карта", LoveColors.Green, Icons.Rounded.Map),
+    Stats("Статистика", LoveColors.Blue, Icons.Rounded.BarChart),
 }
 
 @Composable
@@ -42,10 +46,7 @@ fun PosterGeneratorScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Brush.verticalGradient(colors = listOf(
-                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.1f),
-                MaterialTheme.colorScheme.surface
-            )))
+            .loveScreenBackground(LoveScreen.Posters)
             .verticalScroll(scrollState)
             .padding(horizontal = 20.dp).padding(bottom = 30.dp)
     ) {
@@ -155,15 +156,7 @@ fun PosterGeneratorScreen(
         }
         
         Spacer(modifier = Modifier.height(24.dp))
-        Button(
-            onClick = { },
-            modifier = Modifier.fillMaxWidth().height(56.dp),
-            shape = RoundedCornerShape(16.dp)
-        ) {
-            Icon(Icons.Rounded.Download, contentDescription = null)
-            Spacer(modifier = Modifier.width(12.dp))
-            Text("Сохранить постер", fontWeight = FontWeight.Bold)
-        }
+        LoveGradientButton(text = "Сохранить постер", onClick = { }, icon = Icons.Rounded.Download)
         Spacer(modifier = Modifier.height(40.dp))
     }
 }

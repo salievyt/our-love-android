@@ -18,6 +18,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.deocore.outlove.ui.viewmodel.MapViewModel
+import dev.deocore.outlove.ui.theme.LoveScreen
+import dev.deocore.outlove.ui.theme.loveScreenBackground
+import dev.deocore.outlove.ui.theme.LoveColors
+import dev.deocore.outlove.ui.theme.LoveGradientButton
 
 @Composable
 fun MapScreen(
@@ -26,7 +30,7 @@ fun MapScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    Column(modifier = modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
+    Column(modifier = modifier.fillMaxSize().loveScreenBackground(LoveScreen.Map)) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -34,8 +38,8 @@ fun MapScreen(
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
-                            Color(0xFFE3F2FD),
-                            Color(0xFFBBDEFB)
+                            LoveColors.Blue.copy(alpha = 0.08f),
+                            LoveColors.Purple.copy(alpha = 0.12f)
                         )
                     )
                 ),
@@ -135,15 +139,12 @@ fun MapScreen(
                     }
                 }
                 Spacer(modifier = Modifier.height(8.dp))
-                Button(
+                LoveGradientButton(
+                    text = "Добавить новое место",
                     onClick = { },
-                    modifier = Modifier.fillMaxWidth().height(56.dp).padding(top = 16.dp),
-                    shape = RoundedCornerShape(16.dp)
-                ) {
-                    Icon(Icons.Rounded.AddLocationAlt, contentDescription = null)
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Text("Добавить новое место", fontWeight = FontWeight.Bold)
-                }
+                    icon = Icons.Rounded.AddLocationAlt,
+                    modifier = Modifier.padding(top = 16.dp),
+                )
             }
         }
     }

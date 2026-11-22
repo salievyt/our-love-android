@@ -22,6 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.deocore.outlove.ui.viewmodel.MoreViewModel
+import dev.deocore.outlove.ui.theme.LoveScreen
+import dev.deocore.outlove.ui.theme.loveScreenBackground
 
 @Composable
 fun MoreScreen(
@@ -34,7 +36,7 @@ fun MoreScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surface)
+            .loveScreenBackground(LoveScreen.More)
             .verticalScroll(scrollState)
     ) {
         // Premium Profile Header
