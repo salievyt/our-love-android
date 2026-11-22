@@ -19,6 +19,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.deocore.outlove.ui.viewmodel.TimeCapsuleViewModel
+import dev.deocore.outlove.ui.theme.LoveScreen
+import dev.deocore.outlove.ui.theme.loveScreenBackground
+import dev.deocore.outlove.ui.theme.LoveColors
 
 @Composable
 fun TimeCapsuleScreen(
@@ -31,10 +34,7 @@ fun TimeCapsuleScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Brush.verticalGradient(colors = listOf(
-                MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.2f),
-                MaterialTheme.colorScheme.surface
-            )))
+            .loveScreenBackground(LoveScreen.Capsules)
             .verticalScroll(scrollState)
             .padding(horizontal = 20.dp).padding(bottom = 30.dp)
     ) {
@@ -108,14 +108,14 @@ fun TimeCapsuleScreen(
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
                         Surface(
                             shape = RoundedCornerShape(14.dp),
-                            color = (if (capsule.isReadyToOpen) Color(0xFFE8F5E9) else MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)),
+                            color = (if (capsule.isReadyToOpen) LoveColors.Green.copy(alpha = 0.1f) else MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)),
                             modifier = Modifier.size(48.dp)
                         ) {
                             Box(contentAlignment = Alignment.Center) {
                                 Icon(
                                     if (capsule.isOpened) Icons.Rounded.Drafts else Icons.Rounded.Mail,
                                     contentDescription = null,
-                                    tint = if (capsule.isReadyToOpen) Color(0xFF2E7D32) else MaterialTheme.colorScheme.primary,
+                                    tint = if (capsule.isReadyToOpen) LoveColors.Green else MaterialTheme.colorScheme.primary,
                                     modifier = Modifier.size(24.dp)
                                 )
                             }
@@ -126,11 +126,11 @@ fun TimeCapsuleScreen(
                             Text(
                                 if (capsule.isReadyToOpen) "Готова к открытию" else "Откроется ${capsule.openDate}",
                                 style = MaterialTheme.typography.bodySmall,
-                                color = if (capsule.isReadyToOpen) Color(0xFF2E7D32) else MaterialTheme.colorScheme.onSurfaceVariant
+                                color = if (capsule.isReadyToOpen) LoveColors.Green else MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
                         if (capsule.isReadyToOpen) {
-                            Icon(Icons.Rounded.LockOpen, contentDescription = null, tint = Color(0xFFFF9500))
+                            Icon(Icons.Rounded.LockOpen, contentDescription = null, tint = LoveColors.Orange)
                         } else if (!capsule.isOpened) {
                             Icon(Icons.Rounded.Lock, contentDescription = null, tint = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f), modifier = Modifier.size(20.dp))
                         }

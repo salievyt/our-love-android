@@ -18,6 +18,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.deocore.outlove.ui.viewmodel.TasksViewModel
+import dev.deocore.outlove.ui.theme.LoveScreen
+import dev.deocore.outlove.ui.theme.loveScreenBackground
+import dev.deocore.outlove.ui.theme.LoveColors
+import dev.deocore.outlove.ui.theme.LoveGradientButton
 
 @Composable
 fun TasksScreen(
@@ -30,10 +34,7 @@ fun TasksScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Brush.verticalGradient(colors = listOf(
-                MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.2f),
-                MaterialTheme.colorScheme.surface
-            )))
+            .loveScreenBackground(LoveScreen.Tasks)
             .verticalScroll(scrollState)
             .padding(horizontal = 20.dp).padding(bottom = 30.dp)
     ) {
@@ -41,23 +42,12 @@ fun TasksScreen(
 
         // Generate button
         if (uiState.todayTask == null) {
-            Button(
+            LoveGradientButton(
+                text = "Новое задание для пары",
                 onClick = { viewModel.generateTask() },
-                modifier = Modifier.fillMaxWidth().height(56.dp),
-                shape = RoundedCornerShape(16.dp),
-                enabled = !uiState.isGenerating,
-                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
-            ) {
-                if (uiState.isGenerating) {
-                    CircularProgressIndicator(color = Color.White, modifier = Modifier.size(24.dp), strokeWidth = 2.dp)
-                } else {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Rounded.AutoAwesome, contentDescription = null)
-                        Spacer(modifier = Modifier.width(12.dp))
-                        Text("Новое задание для пары", fontWeight = FontWeight.Bold)
-                    }
-                }
-            }
+                icon = Icons.Rounded.AutoAwesome,
+                loading = uiState.isGenerating,
+            )
         }
 
         // Today's task
@@ -94,20 +84,15 @@ fun TasksScreen(
                     }
                     Spacer(modifier = Modifier.height(24.dp))
                     if (!task.isCompleted) {
-                        Button(
+                        LoveGradientButton(
+                            text = "Отметить выполненным",
                             onClick = { viewModel.completeTask(task.id) },
-                            modifier = Modifier.fillMaxWidth().height(50.dp),
-                            shape = RoundedCornerShape(14.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
-                        ) {
-                            Icon(Icons.Rounded.CheckCircle, contentDescription = null, modifier = Modifier.size(20.dp))
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text("Отметить выполненным", fontWeight = FontWeight.Bold)
-                        }
+                            icon = Icons.Rounded.CheckCircle,
+                        )
                     } else {
                         Surface(
                             shape = RoundedCornerShape(16.dp),
-                            color = Color(0xFFE8F5E9),
+                            color = LoveColors.Green.copy(alpha = 0.1f),
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Row(
@@ -115,9 +100,9 @@ fun TasksScreen(
                                 horizontalArrangement = Arrangement.Center,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Icon(Icons.Rounded.Verified, contentDescription = null, tint = Color(0xFF2E7D32))
+                                Icon(Icons.Rounded.Verified, contentDescription = null, tint = LoveColors.Green)
                                 Spacer(modifier = Modifier.width(12.dp))
-                                Text("Задание выполнено!", color = Color(0xFF2E7D32), fontWeight = FontWeight.Bold)
+                                Text("Задание выполнено!", color = LoveColors.Green, fontWeight = FontWeight.Bold)
                             }
                         }
                     }
@@ -160,7 +145,7 @@ fun TasksScreen(
                             Icon(
                                 if (t.isCompleted) Icons.Rounded.CheckCircle else Icons.Rounded.RadioButtonUnchecked,
                                 contentDescription = null,
-                                tint = if (t.isCompleted) Color(0xFF4CAF50) else MaterialTheme.colorScheme.outline,
+                                tint = if (t.isCompleted) LoveColors.Green else MaterialTheme.colorScheme.outline,
                                 modifier = Modifier.size(24.dp)
                             )
                         }
