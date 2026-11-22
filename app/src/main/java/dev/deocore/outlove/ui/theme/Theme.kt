@@ -79,6 +79,7 @@ fun OutLoveTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
+        shapes = LoveShapes,
         content = content
     )
 }

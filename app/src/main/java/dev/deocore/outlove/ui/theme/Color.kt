@@ -49,3 +49,28 @@ val MoodBad = Color(0xFFFF9500)
 val MoodOkay = Color(0xFFFFCC00)
 val MoodGood = Color(0xFF34C759)
 val MoodAmazing = Color(0xFFAF52DE)
+
+// ---------------------------------------------------------------------------
+// Единый стиль (DESIGN.md в корне проекта). Значения повторяют iOS:
+// our-love-ios/Our Love/DesignSystem/LoveTheme.swift — меняйте синхронно.
+// ---------------------------------------------------------------------------
+
+/** Именованные цвета бренда — используйте их вместо Color(0xFF...) в экранах. */
+object LoveColors {
+    val Pink = dev.deocore.outlove.ui.theme.Pink
+    val Purple = dev.deocore.outlove.ui.theme.Purple
+    val Blue = dev.deocore.outlove.ui.theme.Blue
+    val Orange = dev.deocore.outlove.ui.theme.Orange
+    val Green = dev.deocore.outlove.ui.theme.Green
+    val Yellow = dev.deocore.outlove.ui.theme.Yellow
+    val Red = dev.deocore.outlove.ui.theme.Red
+}
+
+/** Цвет настроения 1..5: sad, down, neutral, happy, loved (как Mood.color в iOS). */
+fun moodColor(mood: Int): Color = when (mood) {
+    1 -> MoodTerrible
+    2 -> MoodBad
+    3 -> MoodOkay
+    4 -> MoodGood
+    else -> MoodAmazing
+}
