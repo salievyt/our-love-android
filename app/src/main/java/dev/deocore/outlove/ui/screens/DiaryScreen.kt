@@ -20,6 +20,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.deocore.outlove.ui.viewmodel.DiaryViewModel
+import dev.deocore.outlove.ui.theme.LoveScreen
+import dev.deocore.outlove.ui.theme.loveScreenBackground
+import dev.deocore.outlove.ui.theme.LoveGradientButton
 
 @Composable
 fun DiaryScreen(
@@ -32,10 +35,7 @@ fun DiaryScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Brush.verticalGradient(colors = listOf(
-                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.2f),
-                MaterialTheme.colorScheme.surface
-            )))
+            .loveScreenBackground(LoveScreen.Diary)
             .verticalScroll(scrollState)
             .padding(horizontal = 20.dp).padding(bottom = 30.dp)
     ) {
@@ -81,9 +81,7 @@ fun DiaryScreen(
                         textAlign = TextAlign.Center
                     )
                     Spacer(modifier = Modifier.height(24.dp))
-                    Button(onClick = { }, shape = RoundedCornerShape(16.dp)) {
-                        Text("Создать запись")
-                    }
+                    LoveGradientButton(text = "Создать запись", onClick = { })
                 }
             }
         }

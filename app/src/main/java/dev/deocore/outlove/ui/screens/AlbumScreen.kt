@@ -21,6 +21,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.deocore.outlove.ui.viewmodel.AlbumViewModel
+import dev.deocore.outlove.ui.theme.LoveScreen
+import dev.deocore.outlove.ui.theme.loveScreenBackground
+import dev.deocore.outlove.ui.theme.LoveGradientButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,10 +37,7 @@ fun AlbumScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Brush.verticalGradient(colors = listOf(
-                MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.2f),
-                MaterialTheme.colorScheme.surface
-            )))
+            .loveScreenBackground(LoveScreen.Album)
             .verticalScroll(scrollState)
             .padding(horizontal = 20.dp).padding(bottom = 30.dp)
     ) {
@@ -125,11 +125,7 @@ fun AlbumScreen(
                     Text("Альбом пуст", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                     Text("Самое время добавить первое фото!", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Spacer(modifier = Modifier.height(24.dp))
-                    Button(onClick = { }, shape = RoundedCornerShape(16.dp)) {
-                        Icon(Icons.Rounded.Add, contentDescription = null)
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text("Добавить фото")
-                    }
+                    LoveGradientButton(text = "Добавить фото", onClick = { }, icon = Icons.Rounded.Add)
                 }
             }
         } else {
