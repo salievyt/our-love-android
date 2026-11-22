@@ -15,6 +15,7 @@ import androidx.compose.material.icons.outlined.Task
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import dev.deocore.outlove.ui.screens.AlbumScreen
@@ -70,7 +71,8 @@ fun MainNavigation() {
                             selectedTextColor = MaterialTheme.colorScheme.primary,
                             unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                             unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                            indicatorColor = MaterialTheme.colorScheme.primaryContainer,
+                            // как в iOS: только цвет иконки, без «пилюли» под ней
+                            indicatorColor = Color.Transparent,
                         )
                     )
                 }

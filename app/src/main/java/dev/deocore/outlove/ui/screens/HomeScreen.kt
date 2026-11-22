@@ -22,6 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.deocore.outlove.ui.viewmodel.HomeViewModel
+import dev.deocore.outlove.ui.theme.LoveScreen
+import dev.deocore.outlove.ui.theme.loveScreenBackground
+import dev.deocore.outlove.ui.theme.LoveRadius
+import dev.deocore.outlove.ui.theme.LoveSpacing
 
 @Composable
 fun HomeScreen(
@@ -34,7 +38,7 @@ fun HomeScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surface)
+            .loveScreenBackground(LoveScreen.Home)
             .verticalScroll(scrollState)
             .padding(horizontal = 20.dp)
     ) {
@@ -164,12 +168,12 @@ private fun SmallBentoCard(
 ) {
     Surface(
         modifier = modifier.aspectRatio(1f),
-        shape = RoundedCornerShape(28.dp),
+        shape = RoundedCornerShape(LoveRadius.L),
         color = color,
         onClick = {}
     ) {
         Column(
-            modifier = Modifier.padding(20.dp),
+            modifier = Modifier.padding(LoveSpacing.Card),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Icon(
@@ -190,7 +194,7 @@ private fun SmallBentoCard(
 
 @Composable
 private fun EventRow(title: String, date: String, daysLeft: Int) {
-    BentoCard(borderColor = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f)) {
+    BentoCard {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(title, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
